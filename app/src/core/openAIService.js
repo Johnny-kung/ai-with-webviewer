@@ -12,4 +12,15 @@ async function queryOpenAI(input) {
   return response;
 }
 
-export { queryOpenAI };
+async function streamOpenAI(input) {
+  const response = await openaiClient.responses.create({
+    instructions: WEBVIEWER_SUPPORT_PRE_PROMPT,
+    model: 'gpt-4o-mini',
+    input: input,
+    stream: true,
+  });
+
+  return response;
+}
+
+export { queryOpenAI, streamOpenAI };

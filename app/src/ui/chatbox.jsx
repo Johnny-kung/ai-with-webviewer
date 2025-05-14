@@ -1,20 +1,42 @@
 import { useState } from 'react';
-import { queryOpenAI } from '../core/openAIService';
+import { queryOpenAI, streamOpenAI } from '../core/openAIService';
 import './chatbox.css';
 
+const initialPrompt = {
+  text: 'Hi! How can I help you today?',
+  type: 'incoming'
+};
+
 export default function Chatbox() {
-  const [messages, setMessages] = useState([
-    { text: 'Hi! How can I help you today?', type: 'incoming' },
-    { text: 'I need to review a document.', type: 'outgoing' },
-  ]);
+  const [messages, setMessages] = useState([initialPrompt]);
   const [input, setInput] = useState('');
 
-  const sendMessage = async () => {
+  function setMessageFromStream(accumulated, deltaLength) {
+    setMessages(prev => {
+      const last = prev[prev.length - 1];
+      if (last?.type === 'incoming' && last.text === accumulated.slice(0, -deltaLength)) {
+        return [
+          ...prev.slice(0, -1),
+          { ...last, text: accumulated }
+        ];
+      } else {
+        return [...prev, { text: accumulated, type: 'incoming' }];
+      }
+    });
+  }
+
+  async function handleSendMessage() {
     if (!input.trim()) return;
     setInput('');
-    setMessages([...messages, { text: input, type: 'outgoing' }]);
-    const response = await queryOpenAI(input);
-    setMessages([...messages, { text: response.output_text, type: 'incoming' }]);
+    setMessages(prev => [...prev, { text: input, type: 'outgoing' }]);
+    const response = await streamOpenAI(input);
+    let accumulated = '';
+    for await (const event of response) {
+      if (event.type === 'response.output_text.delta') {
+        accumulated += event.delta;
+        setMessageFromStream(accumulated, event.delta.length);
+      }
+    }
   };
 
   return (
@@ -33,9 +55,9 @@ export default function Chatbox() {
           placeholder="Type a message..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
         />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={handleSendMessage}>Send</button>
       </div>
     </div>
   );
