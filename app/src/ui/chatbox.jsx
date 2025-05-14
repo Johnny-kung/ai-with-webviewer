@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { queryOpenAI } from '../core/openAIService';
 import './chatbox.css';
 
 export default function Chatbox() {
@@ -8,10 +9,12 @@ export default function Chatbox() {
   ]);
   const [input, setInput] = useState('');
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
-    setMessages([...messages, { text: input, type: 'outgoing' }]);
     setInput('');
+    setMessages([...messages, { text: input, type: 'outgoing' }]);
+    const response = await queryOpenAI(input);
+    setMessages([...messages, { text: response.output_text, type: 'incoming' }]);
   };
 
   return (
