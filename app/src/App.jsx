@@ -14,17 +14,11 @@ async function getOpenAIResponse() {
     input: "Write a one-sentence bedtime story about a unicorn."
   });
 
-  return response;
+  console.log(response);
 }
 
 function App() {
   const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    getOpenAIResponse().then((response) => {
-      console.log(response);
-    });
-  }, []);
 
   return (
     <>
@@ -38,8 +32,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button onClick={getOpenAIResponse}>
+          Click to fetch from OpenAI
         </button>
         <p>
           Edit <code>src/App.jsx</code> and save to test HMR
