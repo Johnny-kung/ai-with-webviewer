@@ -13,6 +13,7 @@ export default function WebViewerComponent() {
     WebViewer({
       path: '/lib/webviewer',
       licenseKey: 'YOUR_LICENSE_KEY',
+      initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf',
     }, ref.current)
       .then((instance) => {
         // Use WebViewer APIs here
@@ -20,7 +21,7 @@ export default function WebViewerComponent() {
   }, [])
 
   return (
-    <div ref={ref} style={{ height: '100%', width: '100%' }}>
+    <div ref={ref} style={{ height: '100%', width: '100%', maxHeight: '100vh' }}>
     </div>
   );
 }
