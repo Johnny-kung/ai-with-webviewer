@@ -1,0 +1,78 @@
+.chatbox {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: #ffffff;
+  border-left: 1px solid #ccc;
+  padding: 16px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chatbox h2 {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.chat-messages {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 6px;
+}
+
+.message {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #111;
+  word-wrap: break-word;
+}
+
+.incoming {
+  background-color: #e0ecff; /* More visible blue */
+  align-self: flex-start;
+}
+
+.outgoing {
+  background-color: #d3f9d8; /* More visible green */
+  align-self: flex-end;
+}
+
+.chat-input {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chat-input input {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #000;
+}
+
+.chat-input input::placeholder {
+  color: #888;
+}
+
+.chat-input button {
+  padding: 10px 16px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.chat-input button:hover {
+  background-color: #0056b3;
+}

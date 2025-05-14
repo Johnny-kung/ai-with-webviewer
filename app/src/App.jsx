@@ -1,49 +1,15 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import OpenAI from 'openai';
 import './App.css'
-
-async function getOpenAIResponse() {
-  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-  const client = new OpenAI({ apiKey, dangerouslyAllowBrowser: true }); // Not ideal but we're innovating here!
-
-  console.log(client);
-  const response = await client.responses.create({
-    model: "gpt-4.1",
-    input: "Write a one-sentence bedtime story about a unicorn."
-  });
-
-  console.log(response);
-}
+import WebViewerComponent from './WebViewer';
+import Chatbox from './chatbox';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={getOpenAIResponse}>
-          Click to fetch from OpenAI
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div id="container">
+      <WebViewerComponent />
+      <Chatbox />
+    </div>
+  );
 }
 
 export default App
+
