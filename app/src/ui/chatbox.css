@@ -21,6 +21,7 @@
   flex-direction: column;
   gap: 10px;
   padding-right: 6px;
+  max-height: 1200px;
 }
 
 .message {
@@ -48,6 +49,8 @@
   grid-template-columns: 1fr auto;
   gap: 8px;
   margin-top: 12px;
+  position: sticky;
+  bottom: 12px;
 }
 
 .chat-input input {
