@@ -12,7 +12,7 @@ const executeCode = (codeString) => {
   })();
 };
 
-function parseMessage(message) {
+function parseMessage(message, setCodeSnippetModalOpen, setCodeSnippet) {
   // remov the ```html and ``` from the response
   const trimmedMessage = message.replace(/```html|```/g, '');
   const parsedMessage = parse(trimmedMessage, {
@@ -24,12 +24,20 @@ function parseMessage(message) {
             <pre style={{ marginBottom: '8px' }}>
               <code>{codeNode?.children?.[0]?.data}</code>
             </pre>
-            <button
-              className="execute-inline"
-              onClick={() => executeCode(codeNode?.children?.[0]?.data.toString())}
-            >
-              Execute Code
-            </button>
+            <div className='btn-container'>
+              <button 
+                className="execute-inline"
+                onClick={() => {
+                setCodeSnippetModalOpen(true);
+                setCodeSnippet(codeNode?.children?.[0]?.data);
+                }}>Show full code</button>
+              <button
+                className="execute-inline"
+                onClick={() => executeCode(codeNode?.children?.[0]?.data.toString())}
+              >
+                Execute Code
+              </button>
+            </div>
           </div>
         );
       }
@@ -38,7 +46,7 @@ function parseMessage(message) {
   return parsedMessage;
 }
 
-export default function IncomingMessage({ text }) {
+export default function IncomingMessage({ text, setCodeSnippetModalOpen, setCodeSnippet }) {
   return (
     <div className="message-container">
       <div className="bot-icon">
@@ -46,7 +54,7 @@ export default function IncomingMessage({ text }) {
       </div>
       <div className="message incoming">
       <div className="message-text">
-        {parseMessage(text)}
+        {parseMessage(text, setCodeSnippetModalOpen, setCodeSnippet)}
       </div>
       </div>
     </div>

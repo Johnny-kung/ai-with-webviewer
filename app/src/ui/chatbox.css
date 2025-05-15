@@ -51,6 +51,7 @@
 .incoming {
   background-color: #e0ecff;
   align-self: flex-start;
+  max-width: 450px;
 }
 
 .outgoing {
