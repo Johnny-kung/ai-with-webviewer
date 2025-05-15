@@ -1,9 +1,7 @@
-import openaiClient from './openAIClient';
-
 const WEBVIEWER_SUPPORT_PRE_PROMPT = `Any story you tell must be a scary story.`;
 
 async function queryOpenAI(input) {
-  const response = await openaiClient.responses.create({
+  const response = await window.openAIClient.responses.create({
     instructions: WEBVIEWER_SUPPORT_PRE_PROMPT,
     model: 'gpt-4o-mini',
     input: input,
@@ -13,14 +11,17 @@ async function queryOpenAI(input) {
 }
 
 async function streamOpenAI(input) {
-  const response = await openaiClient.responses.create({
-    instructions: WEBVIEWER_SUPPORT_PRE_PROMPT,
-    model: 'gpt-4o-mini',
-    input: input,
+  const { openai, preprompt } = window.openAIClient;
+  const stream = await openai.chat.completions.create({
+    model: "gpt-4o",
     stream: true,
+    messages: [
+      { role: "system", content: preprompt },
+      { role: "user", content: input },
+    ],
   });
 
-  return response;
+  return stream;
 }
 
 export { queryOpenAI, streamOpenAI };

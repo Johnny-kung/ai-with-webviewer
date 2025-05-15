@@ -30,15 +30,18 @@ export default function Chatbox() {
     if (!input.trim()) return;
     setInput('');
     setMessages(prev => [...prev, { text: input, type: 'outgoing' }]);
-    const response = await streamOpenAI(input);
+  
+    const responseStream = await streamOpenAI(input);
     let accumulated = '';
-    for await (const event of response) {
-      if (event.type === 'response.output_text.delta') {
-        accumulated += event.delta;
-        setMessageFromStream(accumulated, event.delta.length);
+  
+    for await (const chunk of responseStream) {
+      const delta = chunk.choices?.[0]?.delta?.content;
+      if (delta) {
+        accumulated += delta;
+        setMessageFromStream(accumulated, delta.length);
       }
     }
-  };
+  }
 
   return (
     <div className="chatbox">

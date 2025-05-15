@@ -1,5 +1,6 @@
 import WebViewer from "@pdftron/webviewer";
 import { useEffect, useRef } from "react";
+import { createConnection } from "../core/openAIClient";
 
 export default function WebViewerComponent() {
 
@@ -15,8 +16,9 @@ export default function WebViewerComponent() {
       licenseKey: 'YOUR_LICENSE_KEY',
       initialDoc: 'https://pdftron.s3.amazonaws.com/downloads/pl/demo-annotated.pdf',
     }, ref.current)
-      .then((instance) => {
+      .then(async (instance) => {
         // Use WebViewer APIs here
+        await createConnection();
       })
   }, [])
 
