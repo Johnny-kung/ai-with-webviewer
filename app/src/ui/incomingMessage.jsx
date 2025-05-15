@@ -50,7 +50,7 @@ export default function IncomingMessage({ text, setCodeSnippetModalOpen, setCode
   return (
     <div className="message-container">
       <div className="bot-icon">
-        <img src="/public/apryse-icon.png" alt="Bot Icon" />
+        <img src="/apryse-icon.png" alt="Bot Icon" />
       </div>
       <div className="message incoming">
       <div className="message-text">
