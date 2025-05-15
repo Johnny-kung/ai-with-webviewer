@@ -13,11 +13,12 @@ const executeCode = (codeString) => {
 };
 
 function parseMessage(message) {
-  const parsedMessage = parse(message, {
+  // remov the ```html and ``` from the response
+  const trimmedMessage = message.replace(/```html|```/g, '');
+  const parsedMessage = parse(trimmedMessage, {
     replace: domNode => {
       if (domNode.name === 'pre') {
         const codeNode = domNode.children?.find(child => child.name === 'code');
-        console.log('data', codeNode?.children?.[0]?.data);
         return (
           <div style={{ position: 'relative' }}>
             <pre style={{ marginBottom: '8px' }}>
