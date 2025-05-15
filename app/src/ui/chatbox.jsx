@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { queryOpenAI, streamOpenAI } from '../core/openAIService';
+import { streamOpenAI } from '../core/openAIService';
 import './chatbox.css';
 import IncomingMessage from './incomingMessage';
 
