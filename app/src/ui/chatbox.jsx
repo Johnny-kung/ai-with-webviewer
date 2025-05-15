@@ -4,7 +4,7 @@ import './chatbox.css';
 import IncomingMessage from './incomingMessage';
 
 const initialPrompt = {
-  text: 'Hi! How can I help you today? <pre><code>window.WebViewer.getInstance().Core.documentViewer.setCurrentPage(7);</code></pre>',
+  text: 'Hi! How can I help you today? <pre><code>window.WebViewer.getInstance().Core.documentViewer.setCurrentPage(7);\nwindow.WebViewer.getInstance().Core.documentViewer.setCurrentPage(7)</code></pre>',
   type: 'incoming'
 };
 
