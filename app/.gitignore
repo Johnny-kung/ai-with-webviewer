@@ -1,3 +1,8 @@
 node_modules/
 .env
-./public/webviewer/
+/public/webviewer/
+/dist
+.firebase/
+
+.DS_Store
+../.DS_STORE
