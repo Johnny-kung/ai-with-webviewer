@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { queryOpenAI, streamOpenAI } from '../core/openAIService';
 import './chatbox.css';
+import IncomingMessage from './incomingMessage';
 
 const initialPrompt = {
   text: 'Hi! How can I help you today?',
@@ -41,13 +42,19 @@ export default function Chatbox() {
 
   return (
     <div className="chatbox">
-      <h2>Chatbox</h2>
+      <h2>WebViewer Development Chat</h2>
       <div className="chat-messages">
-        {messages.map((msg, index) => (
-          <div key={index} className={`message ${msg.type}`}>
-            {msg.text}
+      {messages.map((msg, index) => (
+        msg.type === 'incoming' ? (
+          <IncomingMessage key={index} text={msg.text} />
+        ) : (
+          <div key={index} className="message outgoing">
+            <div className="message-text">
+              {msg.text}
+            </div>
           </div>
-        ))}
+        )
+      ))}
       </div>
       <div className="chat-input">
         <input

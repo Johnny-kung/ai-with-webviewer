@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@pdftron/webviewer": "^11.4.0",
+    "html-react-parser": "^5.2.5",
     "openai": "^4.98.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"

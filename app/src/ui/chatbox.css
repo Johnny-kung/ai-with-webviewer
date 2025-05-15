@@ -1,6 +1,8 @@
 .chatbox {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
   background-color: #ffffff;
   border-left: 1px solid #ccc;
   padding: 16px;
@@ -15,8 +17,20 @@
   color: #333;
 }
 
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
 .chat-messages {
+  flex-grow: 1;
   overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -35,13 +49,33 @@
 }
 
 .incoming {
-  background-color: #e0ecff; /* More visible blue */
+  background-color: #e0ecff;
   align-self: flex-start;
 }
 
 .outgoing {
-  background-color: #d3f9d8; /* More visible green */
+  background-color: #d3f9d8;
   align-self: flex-end;
+}
+
+.chat-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.execute-button {
+  padding: 10px 16px;
+  background-color: #28a745;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.execute-button:hover {
+  background-color: #218838;
 }
 
 .chat-input {
