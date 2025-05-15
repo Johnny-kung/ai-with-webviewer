@@ -13,7 +13,9 @@ const executeCode = (codeString) => {
 };
 
 function parseMessage(message, setCodeSnippetModalOpen, setCodeSnippet) {
-  const parsedMessage = parse(message, {
+  // remov the ```html and ``` from the response
+  const trimmedMessage = message.replace(/```html|```/g, '');
+  const parsedMessage = parse(trimmedMessage, {
     replace: domNode => {
       if (domNode.name === 'pre') {
         const codeNode = domNode.children?.find(child => child.name === 'code');
