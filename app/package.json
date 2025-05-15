@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run move-static && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "move-static": "cp -a ./node_modules/@pdftron/webviewer/public/. ./public/webviewer"

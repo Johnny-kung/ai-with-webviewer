@@ -1,3 +1,5 @@
 node_modules/
 .env
-./public/webviewer/
+/public/webviewer/
+/dist
+.firebase/
