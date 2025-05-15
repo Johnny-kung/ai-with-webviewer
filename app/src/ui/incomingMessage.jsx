@@ -22,7 +22,7 @@ function parseMessage(message, setCodeSnippetModalOpen, setCodeSnippet) {
             <pre style={{ marginBottom: '8px' }}>
               <code>{codeNode?.children?.[0]?.data}</code>
             </pre>
-            <div>
+            <div className='btn-container'>
               <button 
                 className="execute-inline"
                 onClick={() => {

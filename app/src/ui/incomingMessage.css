@@ -2,6 +2,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
+  max-width: 400px;
 }
 
 .bot-icon {
@@ -20,7 +21,7 @@
 }
 
 .message-text {
-  max-width: 90%;
+  max-width: 100%;
   padding: 10px 14px;
   border-radius: 12px;
   font-size: 14px;
@@ -39,19 +40,30 @@
   grid-template-columns: 40px auto;
   gap: 10px;
   display: grid;
+  width: 100%;
 }
 
 .execute-inline {
   background-color: #007bff;
   display: inline-block;
   font-size: 12px;
-  margin-right: 6px;
+  margin-right: 8px;
+  
 
   &:hover {
     background-color: #0056b3;
     transform: translateY(-1px);
   }
 }
+.btn-container {
+  color: #ffffff;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+ 
 
 .message pre {
   background-color: #2d2d2d;
