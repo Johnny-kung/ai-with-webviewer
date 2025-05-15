@@ -3,3 +3,6 @@ node_modules/
 /public/webviewer/
 /dist
 .firebase/
+
+.DS_Store
+../.DS_STORE
