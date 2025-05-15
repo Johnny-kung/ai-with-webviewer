@@ -4,11 +4,14 @@ import './chatbox.css';
 import IncomingMessage from './incomingMessage';
 
 const initialPrompt = {
-  text: 'Hi! How can I help you today?',
+  text: `Hi! How can I help you today?`,
   type: 'incoming'
 };
 
-export default function Chatbox() {
+export default function Chatbox({
+  setCodeSnippetModalOpen,
+  setCodeSnippet
+}) {
   const [messages, setMessages] = useState([initialPrompt]);
   const [input, setInput] = useState('');
 
@@ -46,7 +49,11 @@ export default function Chatbox() {
       <div className="chat-messages">
       {messages.map((msg, index) => (
         msg.type === 'incoming' ? (
-          <IncomingMessage key={index} text={msg.text} />
+          <IncomingMessage
+            key={index}
+            text={msg.text}
+            setCodeSnippetModalOpen={setCodeSnippetModalOpen}
+            setCodeSnippet={setCodeSnippet} />
         ) : (
           <div key={index} className="message outgoing">
             <div className="message-text">

@@ -1,0 +1,58 @@
+/* Overlay */
+.code-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Modal Container */
+.code-modal {
+  background-color: #1e1e1e;
+  color: #f8f8f2;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  font-family: Consolas, Monaco, 'Courier New', monospace;
+}
+
+/* Close Button */
+.code-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.code-modal-close:hover {
+  color: #ff5f56;
+}
+
+/* Code Block */
+.code-modal-content pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre;
+  margin: 0;
+}
+
+.code-modal-content code {
+  display: block;
+}

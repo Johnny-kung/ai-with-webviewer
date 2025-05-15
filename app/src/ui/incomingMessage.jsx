@@ -12,23 +12,30 @@ const executeCode = (codeString) => {
   })();
 };
 
-function parseMessage(message) {
+function parseMessage(message, setCodeSnippetModalOpen, setCodeSnippet) {
   const parsedMessage = parse(message, {
     replace: domNode => {
       if (domNode.name === 'pre') {
         const codeNode = domNode.children?.find(child => child.name === 'code');
-        console.log('data', codeNode?.children?.[0]?.data);
         return (
           <div style={{ position: 'relative' }}>
             <pre style={{ marginBottom: '8px' }}>
               <code>{codeNode?.children?.[0]?.data}</code>
             </pre>
-            <button
-              className="execute-inline"
-              onClick={() => executeCode(codeNode?.children?.[0]?.data.toString())}
-            >
-              Execute Code
-            </button>
+            <div>
+              <button 
+                className="execute-inline"
+                onClick={() => {
+                setCodeSnippetModalOpen(true);
+                setCodeSnippet(codeNode?.children?.[0]?.data);
+                }}>Show full code</button>
+              <button
+                className="execute-inline"
+                onClick={() => executeCode(codeNode?.children?.[0]?.data.toString())}
+              >
+                Execute Code
+              </button>
+            </div>
           </div>
         );
       }
@@ -37,7 +44,7 @@ function parseMessage(message) {
   return parsedMessage;
 }
 
-export default function IncomingMessage({ text }) {
+export default function IncomingMessage({ text, setCodeSnippetModalOpen, setCodeSnippet }) {
   return (
     <div className="message-container">
       <div className="bot-icon">
@@ -45,7 +52,7 @@ export default function IncomingMessage({ text }) {
       </div>
       <div className="message incoming">
       <div className="message-text">
-        {parseMessage(text)}
+        {parseMessage(text, setCodeSnippetModalOpen, setCodeSnippet)}
       </div>
       </div>
     </div>
